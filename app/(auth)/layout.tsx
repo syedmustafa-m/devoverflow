@@ -5,7 +5,7 @@ interface layoutProps {
 }
 
 const layout: FC<layoutProps> = ({ children }) => {
-  return <main className="min-h-screen w-full flex-center">{children}</main>;
+  return <main className="flex-center min-h-screen w-full">{children}</main>;
 };
 
 export default layout;

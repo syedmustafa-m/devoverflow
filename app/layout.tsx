@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 // Importing libraries
 import { ClerkProvider } from "@clerk/nextjs";
 import React from "react";
