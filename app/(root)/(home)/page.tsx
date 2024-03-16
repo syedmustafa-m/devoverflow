@@ -1,93 +1,23 @@
+// UI Component Imports
 import QuestionCard from "@/components/cards/QuestionCard";
 import HomeFilters from "@/components/home/HomeFilters";
 import Filter from "@/components/shared/Filter";
 import NoResult from "@/components/shared/NoResult";
 import LocalSearchbar from "@/components/shared/search/LocalSearchbar";
 import { Button } from "@/components/ui/button";
+
+// Constants Import
 import { HomePageFilters } from "@/constants/filters";
+
+// Action Imports
+import { getQuestions } from "@/lib/actions/question.action";
+
+// Third-Party Library Imports
 import Link from "next/link";
 
-const questions = [
-  {
-    key: "1",
-    _id: "1",
-    title: "How can I manage unhandled promise rejections in Node.js?",
-    tags: [
-      {
-        _id: "1",
-        name: "javascript",
-      },
-      {
-        _id: "2",
-        name: "nodejs",
-      },
-    ],
-    author: {
-      _id: "placeholder-id",
-      name: "John Doe",
-      picture: "placeholder-picture-url",
-    },
+export default async function Home() {
+  const result = await getQuestions({});
 
-    upvotes: 151242,
-    views: 50035,
-    answers: Array(5).fill({}), // Assuming no specific structure for answers
-    createdAt: new Date("2021-09-01T07:00:00.000Z"),
-  },
-  {
-    key: "2",
-    _id: "2",
-    title:
-      "What's the difference between `exports` and `module.exports` in Node.js?",
-    tags: [
-      {
-        _id: "1",
-        name: "javascript",
-      },
-      {
-        _id: "2",
-        name: "nodejs",
-      },
-    ],
-    author: {
-      _id: "placeholder-id",
-      name: "John Doe",
-      picture: "placeholder-picture-url",
-    },
-
-    upvotes: 10,
-    views: 100,
-    answers: Array(5).fill({}),
-    createdAt: new Date("2021-09-01T07:00:00.000Z"),
-  },
-  {
-    key: "3",
-    _id: "3",
-    title:
-      "How do I use environment variables in Node.js without exposing them in my codebase?",
-    tags: [
-      {
-        _id: "1",
-        name: "javascript",
-      },
-      {
-        _id: "2",
-        name: "nodejs",
-      },
-    ],
-    author: {
-      _id: "placeholder-id",
-      name: "John Doe",
-      picture: "placeholder-picture-url",
-    },
-
-    upvotes: 10,
-    views: 100,
-    answers: Array(5).fill({}),
-    createdAt: new Date("2021-09-01T07:00:00.000Z"),
-  },
-];
-
-export default function Home() {
   return (
     <>
       <div className="flex w-full flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -118,8 +48,8 @@ export default function Home() {
       <HomeFilters />
 
       <div className="mt-10 flex w-full flex-col gap-6">
-        {questions.length > 0 ? (
-          questions.map((question) => (
+        {result.questions.length > 0 ? (
+          result.questions.map((question) => (
             <QuestionCard
               key={question._id}
               _id={question._id}
